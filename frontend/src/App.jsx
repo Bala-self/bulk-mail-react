@@ -17,7 +17,7 @@ function App() {
   const fileInputRef = useRef(null)
 
   // Dynamic backend URL injection
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000"
+  const BACKEND_URL = "https://bulkmail-udpp.onrender.com" || "http://localhost:4000"
 
   // Clean Excel parser (zero alerts, sets inline error states)
   const processFile = (file) => {
