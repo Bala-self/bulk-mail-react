@@ -18,13 +18,15 @@ const schema = new mongoose.Schema({
 
 const daminrool = mongoose.model("daminrool", schema, "bulkmail")
 
+// Use environment PORT if provided by Render, otherwise fallback to 4000
 const PORT = process.env.PORT || 4000
+
 mongoose.connect(process.env.DB_KEY)
   .then(() => {
-    console.log("connected Db")
+    console.log("Connected to DB")
 
     app.listen(PORT, () => {
-      console.log(`server started on port ${PORT}`)
+      console.log(`Server started on port ${PORT}`)
     })
   })
   .catch((err) => {
@@ -68,7 +70,7 @@ app.post("/mail", async (req, res) => {
     for (let i = 0; i < gmailid.length; i++) {
       const recipient = gmailid[i]
       try {
-        const info = await transporter.sendMail({
+        await transporter.sendMail({
           from: data[0].user,
           to: recipient,
           subject: sub || "find new message",
@@ -94,6 +96,5 @@ app.post("/mail", async (req, res) => {
     res.status(500).json({ success: false, error: error.message })
   }
 })
-
 
  
